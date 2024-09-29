@@ -6,6 +6,7 @@ Flask.
 """
 import sys
 import os
+
 from flask import Flask, render_template, request, jsonify
 
 from modules.document_loader import load_policies
@@ -14,7 +15,7 @@ from modules.chatbot import PoliciesChatbot
 
 app = Flask(__name__)
 
-policies_path="../policies"
+policies_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../policies'))
 policies = load_policies(policies_path)
 
 chatbot = PoliciesChatbot(policies, "gpt-4o-mini")
