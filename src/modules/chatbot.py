@@ -9,12 +9,55 @@ class PoliciesChatbot:
     """
 
     def __init__(self, policies, model="gpt-4o"):
+        """
+        Initializes an instance of the PoliciesChatbot class.
+
+        This constructor sets up the chatbot with the provided policies and 
+        model. It also initializes an OpenAI client for processing requests.
+
+        Args:
+        - policies (dict): A dictionary containing airline policies. The keys 
+            represent airline names, and the values are nested dictionaries 
+            with specific policy document names for each airline. The values
+            for each document are also nested dictionaries with 'fulltext'
+            (string with the complete file content) and 'slicedtext' (list 
+            containing sliced chunks of the text with some characters
+            overlapping) keys.
+        - model (str, optional): The model identifier to use with the OpenAI 
+            client (default is "gpt-4o").
+        
+        Attrs:
+        - client (OpenAI): An instance of the OpenAI client used for 
+            generating responses.
+        - policies (dict): Stores the provided airline policies.
+        - model (str): The model identifier used for processing responses.
+        - airlines (list): A list of airline names extracted from the keys of 
+            the 'policies' dictionary.
+        """
         self.client = OpenAI()
         self.policies = policies
         self.model = model
         self.airlines = list(policies.keys())
 
     def run_step(self, question):
+        """
+        Executes a multi-step process to answer user questions related to 
+        airline policies.
+
+        This method follows a series of logical steps to determine whether a 
+        given question is related to airline policies. If the question is 
+        policy related, it then identifies the airline name, locates the 
+        most appropiate policy document, and extracts the specific information 
+        to answer the question. If any step fails, it provides a default 
+        response based on the process step of the failure.
+
+        Args:
+        - question (str): Input message from the user.
+
+        Returns
+        - (str): Answer to the user's question. A default answer is provided
+            if any step to obtain the information fails.
+        """
         # 1. Is an airline policies related question?
         policies_related = self.get_is_policies_related(question)
         if policies_related == "True":
@@ -28,15 +71,17 @@ class PoliciesChatbot:
                         # 4. Look for the information to answer the question
                         info = self.get_info_from_document(
                                         question, airline, document)
+                        # 5. Check if information was found successfully 
                         if info != "False":
+                            # Yes --> Answer the question
                             return info
                         else:
+                            # No --> Read the other documents
                             for document in self.policies[airline]:
                                 info = self.get_info_from_document(
                                                 question, airline, document)
                                 if info != "False":
-                                    # self.answer_info_to_user(info)
-                                    # break
+                                    # Yes --> Answer the question
                                     return info  
                             else: 
                                 return(self.answer_default(4))
@@ -285,9 +330,6 @@ class PoliciesChatbot:
             else:
                 return completion.choices[0].message.content
         return "False"
-
-    def answer_info_to_user(self, info):
-        return info
         
     def answer_default(self, option):
         """

@@ -51,32 +51,32 @@ def load_policies(policies_path):
         documents are stored.
     
     Returns:
-    - policies (dict): Dictionary in which the keys are the airline names, 
-        classifying the policy documents by airline. Each airline is a 
-        dictionary itself too, in which the keys are the document names.
-        Finally, each document is also a dictionary with the keys 'fulltext'
-        and 'slicedtext'. Full text is a string with all the file content, and
-        sliced text is a list containing sliced chunks of the text with some
-        overlapping, to ease providing that text as smaller inputs to the LLM
-        model.
-        This is a schema of the policies dictionary format:
+    - policies (dict): A dictionary containing airline policies. The keys 
+            represent airline names, and the values are nested dictionaries 
+            with specific policy document names for each airline. The values
+            for each document are also nested dictionaries with 'fulltext'
+            (string with the complete file content) and 'slicedtext' (list 
+            containing sliced chunks of the text with some characters
+            overlapping) keys.
 
-            policies{
-                airline_1{
-                    document_1{
-                        'fulltext': (str)
-                        'slicedtext': (list)
+            This is an example schema of the policies dictionary format:
+
+                policies{
+                    airline_1{
+                        document_1{
+                            'fulltext': (str)
+                            'slicedtext': (list)
+                        },
+                        document_2{
+                            ...
+                        },
+                        ...
                     },
-                    document_2{
+                    airline_2{
                         ...
                     },
                     ...
-                },
-                airline_2{
-                    ...
-                },
-                ...
-            }
+                }
     """
     policies = {}
     for airline in os.listdir(policies_path):
