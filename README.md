@@ -6,9 +6,11 @@ This application has been developed using Python 3.8.10, so it is recommended to
 ### 1.2. How to set up the application
 1. Create a Python virtual environment and activate it:
 > python3 -m venv ai_venv
+
 > source ai_venv/bin/activate
 2. Clone this repository and move to the root path of the repository:
 > git clone git@github.com:AlejandroDiazD/ai_technical_challenge.git
+
 > cd ai_technical_challenge
 3. Install Python requirements:
 python3 -m pip install -r requirements.txt
