@@ -33,10 +33,26 @@ The solution has been based on a Flask local server for the web interface and on
 **PyPDF2** is an open-source Python module that has been used to read airline policy PDF documents and transform them into string variables that can be programmatically managed by the application.
 ### 2.2. Project and code structure
 The project has been designed with the following structure:
-> figures
-> policies
->    _
->
+
+├── README.md
+├── challenge_description.md
+├── /figures
+│   └── run_step_flowchart.jpg
+├── /policies
+│   ├── AmericanAirlines
+│   ├── Delta
+│   └── United
+├── requirements.txt
+└── src
+    ├── app.py
+    ├── modules
+    │   ├── chatbot.py
+    │   └── document_loader.py
+    ├── static
+    │   └── style.css
+    └── templates
+        └── index.html
+
 
 
 ### 2.3. Challenges encountered
