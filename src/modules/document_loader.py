@@ -13,10 +13,10 @@ def extract_text_from_pdf(pdf_path):
     text content into a string.
 
     Args: 
-        pdf_path (str): String with the pdf file path to be read.
+    - pdf_path (str): String with the pdf file path to be read.
 
     Returns: 
-        text (str): String with the content of the pdf file.
+    - text (str): String with the content of the pdf file.
     """
     text = ""
     with open(pdf_path, 'rb') as file:
