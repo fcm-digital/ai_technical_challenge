@@ -31,27 +31,8 @@ The solution has been based on a Flask local server for the web interface and on
 **OpenAI API** has been used to develop the backend of the application in charge of answering user questions. It has been selected because it already provides pre-trained LLM models and because it was recommended in the challenge description.
 
 **PyPDF2** is an open-source Python module that has been used to read airline policy PDF documents and transform them into string variables that can be programmatically managed by the application.
-### 2.2. Project and code structure
-The project has been designed with the following structure:
-
-├── README.md
-├── challenge_description.md
-├── /figures
-│   └── run_step_flowchart.jpg
-├── /policies
-│   ├── AmericanAirlines
-│   ├── Delta
-│   └── United
-├── requirements.txt
-└── src
-    ├── app.py
-    ├── modules
-    │   ├── chatbot.py
-    │   └── document_loader.py
-    ├── static
-    │   └── style.css
-    └── templates
-        └── index.html
+### 2.2. Code structure
+The code is in the */src* directory, and it is structured into a main *app.py* file that runs the Flask server and makes use of the *chatbot.py* and *document_loader.py* modules to run the backend and answer the user questions.
 
 
 
