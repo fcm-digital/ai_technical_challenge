@@ -15,6 +15,10 @@ This application has been developed using Python 3.8.10, so it is recommended to
 3. Install Python requirements:
 > python3 -m pip install -r requirements.txt
 
+4. Set the OpenAI API Key: Create a ".env" file in the root path of the repository, and write:
+> OPENAI_API_KEY="youropenapikeycode"
+Where *youropenapikeycode* is your OpenAI API Key code.
+
 ### 1.1. How to run the application
 1. Run the app:
 > python3 src/app.py
