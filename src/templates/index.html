@@ -12,7 +12,7 @@
     <div class="chat-container">
         <div id="chat-box"></div>
         <form id="chat-form">
-            <input type="text" id="question" placeholder="Escribe tu pregunta..." required>
+            <input type="text" id="question" placeholder="Please, ask your question." required>
             <button type="submit">Enviar</button>
         </form>
     </div>
@@ -24,10 +24,10 @@
             const question = questionInput.value;
             questionInput.value = '';
 
-            // Añadir la pregunta al chat
+            // Add chat question
             addMessageToChat('Usuario', question);
 
-            // Enviar la pregunta al servidor
+            // Send question to server
             const response = await fetch('/ask', {
                 method: 'POST',
                 headers: {

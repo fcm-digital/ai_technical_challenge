@@ -11,8 +11,8 @@ body {
 }
 
 .chat-container {
-    width: 1000px; /* Aumenta el ancho */
-    height: 80vh; /* Aumenta la altura total */
+    width: 1000px; /* Increase width */
+    height: 80vh; /* Increase total height */
     background: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -22,12 +22,12 @@ body {
 }
 
 #chat-box {
-    flex: 1; /* Permite que este elemento ocupe todo el espacio disponible */
+    flex: 1; /* Allows this element to occupy all the available space. */
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
-    height: 100%; /* Asegura que ocupe el espacio vertical */
+    height: 100%; /* Ensures that it occupies the vertical space. */
 }
 
 .chat-message {
