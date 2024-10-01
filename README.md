@@ -13,14 +13,14 @@ This application has been developed using Python 3.8.10, so it is recommended to
 
 > cd ai_technical_challenge
 3. Install Python requirements:
-python3 -m pip install -r requirements.txt
+> python3 -m pip install -r requirements.txt
 
 ### 1.1. How to run the application
 1. Run the app:
 > python3 src/app.py
 2. Open a web browser and search the following URL:
 > http://127.0.0.1:5000/
-3. Use the chat to ask questions and automatically receive answers.
+3. Use the chat to ask questions and then automatically receive answers.
 
 ## 2. Design explanation
 ### 2.1. Technologies used
@@ -33,8 +33,11 @@ The solution has been based on a Flask local server for the web interface and on
 **PyPDF2** is an open-source Python module that has been used to read airline policy PDF documents and transform them into string variables that can be programmatically managed by the application.
 
 ### 2.2. Code structure and explanation
-The code is in the */src* directory, and it is structured into a main file *app.py* that runs the Flask server and makes use of the *PoliciesChatbot* class defined in *chatbot.py* modules to run the backend and answer the user questions. The *PoliciesChatbot* class makes use of the functions defined in the other module *document_loader.py* for reading the PDF and Markdown documents.
-The different parts of the code are explained in next sections. It is recommended to read the explanations together with reading the code. 
+The code is in the */src* directory of the repository, and it is structured into a main file *app.py* that runs the Flask server making use of the *PoliciesChatbot* class defined in *chatbot.py* module to run the backend and answer the user questions. The *PoliciesChatbot* class makes use of the functions defined in the other module *document_loader.py* for reading PDF and Markdown documents.
+The different parts of the code are explained in next sections. It is recommended to read the explanations along with the code:
+* app.py
+* chatbot.py
+* document\_loader.py
 
 #### app.py
 This code setups a simple web interface based on Flask that allows users to ask policy related questions and receive responses from the chatbot. The logic of the application for answering the questions has been designed in the *PoliciesChatbot* of the *chatbot.py* module. To get question answers, the app just calls the *run_step()* method of the *PoliciesChatbot* class.
