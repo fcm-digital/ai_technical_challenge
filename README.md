@@ -47,7 +47,7 @@ This module implements the *PoliciesChabot* class in charge of running the main 
 * **\_\_init\_\_ (self, policies, model)**: The class requires the path of the policy documents and the name of the model to be used. In this solution, "gpt-4o" model has been used.
 * **run_step (self, question)**: This method implements a multi-step process to answer the user questions.
 The solution to respond to user questions based on the information obtained from airline policy documents has been broken down into different steps, so the program tackles the problem gradually instead of trying to solve it all at once. By breaking the problem into smaller and simpler tasks, greater robustness and control over the responses provided by the LLM model have been achieved, thus avoiding unexpected answers and facilitating the identification of the point where the process may have failed.
-The problem has been divided into the following steps (it is recommended to read the explanation along with the diagram provided in [![Flowchart](./figures/run_step_flowchart.jpg)](./figures/run_step_flowchart.jpg) for greater clarity):
+The problem has been divided into the following steps (it is recommended to read the explanation along with the diagram provided in [Run Step Flowchart](./figures/run_step_flowchart.jpg) for greater clarity):
 
 1. The system classifies the user's message to determine if it is a question related to airline policies or not. If it is, the next step is carried out. If not, a default response is provided to the user.
 
