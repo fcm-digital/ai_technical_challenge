@@ -37,15 +37,29 @@ The code is in the */src* directory of the repository, and it is structured into
 The different parts of the code are explained in next sections. It is recommended to read the explanations along with the code:
 * app.py
 * chatbot.py
-* document\_loader.py
+* document_loader.py
 
 #### app.py
 This code setups a simple web interface based on Flask that allows users to ask policy related questions and receive responses from the chatbot. The logic of the application for answering the questions has been designed in the *PoliciesChatbot* of the *chatbot.py* module. To get question answers, the app just calls the *run_step()* method of the *PoliciesChatbot* class.
 
 #### chatbot.py
-This module implements the *PoliciesChabot* class in charge of running the backend of the application. The different methods of the class are explained below:
+This module implements the *PoliciesChabot* class in charge of running the main part of the backend of the application. The different methods of the class are explained below:
 * **\_\_init\_\_ (self, policies, model)**: The class requires the path of the policy documents and the name of the model to be used. In this solution, "gpt-4o" model has been used.
-* **run_step (self, question)**: This method implements a multi-step process to answer the user questions. In each step, different conditions are checked  
+* **run_step (self, question)**: This method implements a multi-step process to answer the user questions.
+The solution to respond to user questions based on the information obtained from airline policy documents has been broken down into different steps, so the program tackles the problem gradually instead of trying to solve it all at once. By breaking the problem into smaller and simpler tasks, greater robustness and control over the responses provided by the LLM model have been achieved, thus avoiding unexpected answers and facilitating the identification of the point where the process may have failed.
+The problem has been divided into the following steps (it is recommended to read the explanation along with the diagram provided in [![Flowchart](./figures/run_step_flowchart.jpg)](./figures/run_step_flowchart.jpg) for greater clarity):
+
+1. The system classifies the user's message to determine if it is a question related to airline policies or not. If it is, the next step is carried out. If not, a default response is provided to the user.
+
+2. The system obtains the name of the airline the question is about. This way, the search for information can be conducted exclusively in the documents of that specific airline. If the name is obtained and belongs to one of the airlines for which information is available, the next step is carried out. If not, a default response is provided to the user.
+
+3. The system analyzes the question to identify the document in which it is most likely to find the information from all those available. This document selection is performed by the LLM itself based on the document names and its reasoning about their content. If a document that may contain the information is found, the next step is carried out. If not, a default response is provided to the user.
+
+4. The system analyzes the document in search of the information. Given that the input of the selected model, gpt-4, has a maximum limit of 128,000 tokens in the context window, the *split_string()* function has been implemented in the *document_loader.py* module to allow splitting the LLM input into smaller text chunks if necessary, enabling it to search for the information gradually within these chunks of text.
+
+5. Finally, it checks if the information could be obtained from the text. If so, the user is provided with the requested information. If not, step 4 is iterated over all the airline's existing documents until the information is found. If the information is not found after checking all the documents, a default response is given.
+
+To carry out all these steps, the *run_step()* method utilizes the other methods defined in the class.  
 
 #### document_loader.py
 
