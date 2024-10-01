@@ -79,19 +79,29 @@ This module provides functions to work with PDF and Markdown files, so that it r
 
 ### 2.3. Challenges encountered
 **Challenge**: Input length limit in the context window of the LLM when processing the policy documents.
+
 **Solution**: Implement a function to split the text into smaller chunks.
 
+
 **Challenge**: The system is unable to answer the question due to the complexity of the task.
+
 **Solution**: Divide the problem into simpler tasks in which the uncertainty of the model's response is reduced.
 
+
 **Challenge**: The user question is not well formulated.
+
 **Solution**: Automation of default responses that help guide the user to rephrase the question to make it easier for the system to find the desired information.
 
+
 **Challenge**: Unexpected responses from the system.
+
 **Solution**: Limit the output of the LLM at the different steps to predefined response options, which facilitates the program's flow through if/else conditionals.
 
+
 **Challenge**: Incorrect response from the system even after dividing the task into simpler tasks.
+
 **Solution**: Guide the LLM's reasoning through a predefined chain of thoughts.
+
 
 ### 2.4. Future improvements
 * Use embeddings and vector database techniques to improve the efficiency and execution speed of the application.
