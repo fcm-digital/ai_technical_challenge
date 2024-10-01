@@ -53,7 +53,17 @@ The problem has been divided into the following steps (it is recommended to read
 3. The system analyzes the question to identify the document in which it is most likely to find the information from all those available. This document selection is performed by the LLM itself based on the document names and its reasoning about their content. If a document that may contain the information is found, the next step is carried out. If not, a default response is provided to the user.
 4. The system analyzes the document in search of the information. Given that the input of the selected model, gpt-4, has a maximum limit of 128,000 tokens in the context window, the *split_string()* function has been implemented in the *document_loader.py* module to allow splitting the LLM input into smaller text chunks if necessary, enabling it to search for the information gradually within these chunks of text.
 5. Finally, the system checks if the information could be obtained from the text. If so, the user is provided with the requested information. If not, step 4 is iterated over all the airline's existing documents until the information is found. If the information is not found after checking all the documents, a default response is given.
-To carry out all these steps, the *run_step()* method utilizes the other methods defined in the class.  
+To carry out all these steps, the *run_step()* method utilizes the other methods defined in the class. 
+
+* **get_is_policies_related(self,message)**: This method is used in step 1 to determine if the input is a question related to airline policies or not.
+
+* **get_airline_name(self, question)**: This method is used in step 2 to obtain the airline name from the question.
+
+* **get_necessary_document(self, question, airline)**: This method is used in step 3 to obtain the document name in which to look for the information.
+
+* **get_info_from_document(self, question, airline, document)**: This method is used in step 4 to obtain the required information from the selected document.
+
+* **answer_default(self, option)**: This method returns the different default answers.
 
 #### 2.2.3. document_loader.py
 
