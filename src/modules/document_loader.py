@@ -1,54 +1,25 @@
 """
-This module contains some util functions to work with pdf and markdown 
-documents.
+This module provides functions to work with PDF and Markdown files, so that 
+it returns the text in string variables that can be programmatically handled.
 """
 
 import os
 import logging
 import PyPDF2
 
-def extract_text_from_pdf(pdf_path):
-    """
-    This function receives a pdf path, reads it and returns the pdf 
-    text content into a string.
-
-    Args: 
-    - pdf_path (str): String with the pdf file path to be read.
-
-    Returns: 
-    - text (str): String with the content of the pdf file.
-    """
-    text = ""
-    with open(pdf_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        for page in reader.pages:
-            text += page.extract_text()
-    return text
-
-def extract_text_from_markdown(md_path):
-    """
-    This function receives a markdown file path, reads it and returns the 
-    markdown text content into a string.
-
-    Args: 
-    - md_path (str): String with the markdown file path to be read.
-
-    Returns:
-    - text (str): String with the content of the markdown file.
-    """
-    with open(md_path, 'r', encoding='utf-8') as file:
-        text = file.read()
-    return text
-
-def load_policies(policies_path):
+def load_policies(policies_path, size, overlap):
     """
     This functions receives the airline policies path, reads all the
-    policies documents and returns the information into a dictionary
+    policy documents and returns the information into a dictionary
     with the following format:
 
     Args:
     - policies_path (str): String with the directory path where the policy 
         documents are stored.
+    - size (int): The size of each substring into which the total text of each
+        document is split.
+    - overlap (int): The number of characters that overlap between 
+        consecutive substrings in each document when split.
     
     Returns:
     - policies (dict): A dictionary containing airline policies. The keys 
@@ -96,12 +67,45 @@ def load_policies(policies_path):
             airline = root.split('/')[-1]
             policies[airline][file] = {}
             policies[airline][file]['fulltext'] = text
-            sliced_text = split_string(text, 2000, 200)
+            sliced_text = split_string(text, size, overlap)
             policies[airline][file]['slicedtext'] = sliced_text
 
             logging.debug(f"Airline: {airline:<20.20}, File: {file:<40.40}, FileLen: {len(text):>10}")
 
     return policies
+
+def extract_text_from_pdf(pdf_path):
+    """
+    This function receives a pdf path and returns the pdf 
+    text content into a string.
+
+    Args: 
+    - pdf_path (str): String with the pdf file path to be read.
+
+    Returns: 
+    - text (str): String with the content of the pdf file.
+    """
+    text = ""
+    with open(pdf_path, 'rb') as file:
+        reader = PyPDF2.PdfReader(file)
+        for page in reader.pages:
+            text += page.extract_text()
+    return text
+
+def extract_text_from_markdown(md_path):
+    """
+    This function receives a markdown file path and returns the 
+    markdown text content into a string.
+
+    Args: 
+    - md_path (str): String with the markdown file path to be read.
+
+    Returns:
+    - text (str): String with the content of the markdown file.
+    """
+    with open(md_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    return text
 
 def split_string(text, size, overlap):
     """

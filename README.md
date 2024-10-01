@@ -66,7 +66,15 @@ To carry out all these steps, the *run_step()* method utilizes the other methods
 * **answer_default(self, option)**: This method returns the different default answers.
 
 #### 2.2.3. document_loader.py
+This module provides functions to work with PDF and Markdown files, so that it returns the text in string variables that can be programmatically handled.
 
+* **load_policies(policies_path, size, overlap)**: This functions receives the airline policies path, reads all the policy documents and returns the information into a dictionary. 
+
+* **extract_text_from_pdf(pdf_path)**: This function receives a pdf path and returns the pdf text content into a string.
+
+* **extract_text_from_markdown(md_path)**: This function receives a markdown file path and returns the markdown text content into a string.
+
+* **split_string(text, size, overlap)**: This function splits a string into smaller substrings with a specified character overlap.
 
 
 ### 2.3. Challenges encountered
